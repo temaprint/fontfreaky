@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+import decorForm from "../../assets/pics/contact-pic.png";
+---
+
+<div
+    class="flex relative justify-start items-center p-[60px] bg-[#F3F3F3] rounded-[45px] overflow-hidden"
+>
+  <form class="bg-gray sm:p-6 h-full w-full lg:max-w-lg">
+    <div class="mb-4">
+      <textarea
+          id="message"
+          placeholder="Start typing to 𝓯𝓻𝓮𝓪𝓴𝔂"
+          class="w-full px-[30px] py-[18px] border border-black rounded-[14px] text-black outline-none"
+      ></textarea>
+      <button type="button" id="copyButton" class="btn-primary w-full mt-2">Copy</button>
+    </div>
+  </form>
+  <picture class="absolute right-[-35%] top-[2%] bottom-[2%] hidden lg:block">
+    <Image src={decorForm} alt="decor" />
+  </picture>
+</div>
+
+<script>
+  // Функция для преобразования текста в стиль "𝓯𝓻𝓮𝓪𝓴𝔂"
+  function toFreakyText(input: string): string {
+    const normal = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const freaky = [
+      "𝓪", "𝓫", "𝓬", "𝓭", "𝓮", "𝓯", "𝓰", "𝓱", "𝓲", "𝓳", "𝓴", "𝓵", "𝓶", "𝓷", "𝓸", "𝓹", "𝓺", "𝓻", "𝓼", "𝓽", "𝓾", "𝓿", "𝔀", "𝔁", "𝔂", "𝔃", // Lowercase
+      "𝓐", "𝓑", "𝓒", "𝓓", "𝓔", "𝓕", "𝓖", "𝓗", "𝓘", "𝓙", "𝓚", "𝓛", "𝓜", "𝓝", "𝓞", "𝓟", "𝓠", "𝓡", "𝓢", "𝓣", "𝓤", "𝓥", "𝓦", "𝓧", "𝓨", "𝓩"  // Uppercase
+    ];
+
+
+    return input.split('').map((char: string) => {
+      const index = normal.indexOf(char);
+      return index !== -1 ? freaky[index] : char;
+    }).join('');
+  }
+
+  // Получаем элементы
+  const textarea = document.getElementById('message') as HTMLTextAreaElement | null;
+  const copyButton = document.getElementById('copyButton') as HTMLButtonElement | null;
+
+  if (textarea && copyButton) {
+    // Обработчик ввода
+    textarea.addEventListener('input', (event: Event) => {
+      const target = event.target as HTMLTextAreaElement | null;
+      if (target) {
+        const inputText = target.value;
+        const freakyText = toFreakyText(inputText);
+        target.value = freakyText;
+      }
+    });
+
+    // Обработчик копирования
+    copyButton.addEventListener('click', () => {
+      if (textarea) {
+        textarea.select();
+        navigator.clipboard.writeText(textarea.value).then(() => {
+          alert('Text copied to clipboard!');
+        });
+      }
+    });
+  }
+</script>

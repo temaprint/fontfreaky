@@ -1,0 +1,19 @@
+# Sys
+.DS_Store
+Thumbs.db
+
+# Node.js, Python
+node_modules/
+venv/
+dist/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# log & tmp & env
+*.log
+*.tmp
+*.bak
+.env
