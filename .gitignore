@@ -20,3 +20,10 @@ dist/
 
 # Deploy
 deploy.sh
+
+# Astro cache
+.astro/
+
+# Binaries in root
+FreakyFont.zip
+fontfreaky.png
