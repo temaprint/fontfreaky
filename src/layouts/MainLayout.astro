@@ -9,26 +9,11 @@ const { ...props } = Astro.props;
 
 <html lang="en">
   <MainHead {...props} />
-  <style>
-    html.lenis {
-      height: auto;
-    }
-    .lenis.lenis-smooth {
-      scroll-behavior: auto;
-    }
-    .lenis.lenis-smooth [data-lenis-prevent] {
-      overscroll-behavior: contain;
-    }
-    .lenis.lenis-stopped {
-      overflow: hidden;
-    }
-  </style>
-  <script src="../utils/lenis"></script>
-  <body class="bg-white font-grotesk">
-    <main>
-      <Navbar />
+  <body class="y2k-grid min-h-screen">
+    <Navbar />
+    <main class="relative">
       <slot />
-      <Footer />
     </main>
+    <Footer />
   </body>
 </html>

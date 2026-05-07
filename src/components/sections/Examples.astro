@@ -1,0 +1,47 @@
+---
+const examples = [
+  { label: "INSTAGRAM BIO", text: "𝓛𝓲𝓿𝓮 • 𝓛𝓪𝓾𝓰𝓱 • 𝓛𝓸𝓿𝓮 ✨" },
+  { label: "TWITTER NAME", text: "𝓕𝓻𝓮𝓪𝓴𝔂 𝓓𝓮𝓿 🖥️" },
+  { label: "DISCORD STATUS", text: "𝓒𝓸𝓭𝓲𝓷𝓰 𝓲𝓷 𝓽𝓱𝓮 𝓶𝓪𝓽𝓻𝓲𝔁" },
+  { label: "YOUTUBE TITLE", text: "𝓗𝓸𝔀 𝓽𝓸 𝓶𝓪𝓴𝓮 𝔂𝓸𝓾𝓻 𝓽𝓮𝔁𝓽 𝓯𝓻𝓮𝓪𝓴𝔂" },
+  { label: "GITHUB README", text: "𝓑𝓾𝓲𝓵𝓽 𝔀𝓲𝓽𝓱 💚" },
+  { label: "TIKTOK CAPTION", text: "𝓣𝓱𝓲𝓼 𝓯𝓸𝓷𝓽 𝓲𝓼 𝓼𝓸 𝓯𝓻𝓮𝓪𝓴𝔂 🔥" },
+];
+---
+
+<section class="px-4 py-12 md:px-8 max-w-5xl mx-auto">
+  <h2 class="font-pixel text-lg md:text-xl text-lime glow-lime mb-2">
+    &gt; USAGE EXAMPLES_
+  </h2>
+  <p class="text-cyan mb-8 text-lg">Where to use Freaky Font. Click to copy any example.</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {examples.map(({ label, text }) => (
+      <div
+        class="example-card group bg-grid border-2 border-lime/20 hover:border-hotpink p-4 transition-all cursor-pointer relative"
+        data-text={text}
+      >
+        <span class="font-pixel text-[0.55rem] text-hotpink block mb-2">// {label}</span>
+        <p class="text-lime text-xl font-retro group-hover:text-hotpink transition-colors">{text}</p>
+        <span class="absolute top-2 right-2 font-pixel text-[0.5rem] text-lime/30 group-hover:text-cyan transition-colors">[COPY]</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.example-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const text = (card as HTMLElement).dataset.text;
+      if (text) {
+        navigator.clipboard.writeText(text).then(() => {
+          const copyLabel = card.querySelector('[class*="absolute"]') as HTMLElement;
+          if (copyLabel) {
+            copyLabel.textContent = '[COPIED!]';
+            setTimeout(() => { copyLabel.textContent = '[COPY]'; }, 1200);
+          }
+        });
+      }
+    });
+  });
+</script>

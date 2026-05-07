@@ -1,65 +1,80 @@
 ---
-import { Image } from "astro:assets";
-import decorForm from "../../assets/pics/contact-pic.png";
 ---
 
-<div
-    class="flex relative justify-start items-center p-[60px] bg-[#F3F3F3] rounded-[45px] overflow-hidden"
->
-  <form class="bg-gray sm:p-6 h-full w-full lg:max-w-lg">
-    <div class="mb-4">
-      <textarea
-          id="message"
-          placeholder="Start typing to 𝓯𝓻𝓮𝓪𝓴𝔂"
-          class="w-full px-[30px] py-[18px] border border-black rounded-[14px] text-black outline-none"
-      ></textarea>
-      <button type="button" id="copyButton" class="btn-primary w-full mt-2">Copy</button>
+<div class="pixel-border bg-grid p-4 md:p-8 relative">
+  <div class="flex items-center gap-2 mb-4">
+    <span class="font-pixel text-[0.6rem] text-lime">C:\FREAKY&gt;</span>
+    <span class="blink text-lime">_</span>
+  </div>
+
+  <form class="space-y-4" onsubmit="return false;">
+    <textarea
+      id="message"
+      placeholder="Type here to make it 𝓯𝓻𝓮𝓪𝓴𝔂..."
+      class="w-full bg-dark border-2 border-lime/30 focus:border-lime p-4 text-lime font-retro text-xl focus:outline-none placeholder:text-lime/20 resize-y min-h-[120px] transition-colors"
+      rows={4}
+    ></textarea>
+
+    <div class="flex flex-col sm:flex-row gap-3">
+      <button type="button" id="copyButton" class="btn-y2k flex-1">
+        ★ COPY FREAKY TEXT ★
+      </button>
+      <button type="button" id="clearButton" class="btn-y2k btn-y2k-pink flex-1">
+        CLEAR
+      </button>
     </div>
   </form>
-  <picture class="absolute right-[-35%] top-[2%] bottom-[2%] hidden lg:block">
-    <Image src={decorForm} alt="decor" />
-  </picture>
+
+  <!-- Toast notification -->
+  <div id="freaky-toast" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-lime text-dark font-pixel text-[0.6rem] px-4 py-2 opacity-0 transition-all pointer-events-none z-10">
+    COPIED TO CLIPBOARD!
+  </div>
 </div>
 
 <script>
-  // Функция для преобразования текста в стиль "𝓯𝓻𝓮𝓪𝓴𝔂"
+  const normal = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const freaky = [
+    "𝓪","𝓫","𝓬","𝓭","𝓮","𝓯","𝓰","𝓱","𝓲","𝓳","𝓴","𝓵","𝓶","𝓷","𝓸","𝓹","𝓺","𝓻","𝓼","𝓽","𝓾","𝓿","𝔀","𝔁","𝔂","𝔃",
+    "𝓐","𝓑","𝓒","𝓓","𝓔","𝓕","𝓖","𝓗","𝓘","𝓙","𝓚","𝓛","𝓜","𝓝","𝓞","𝓟","𝓠","𝓡","𝓢","𝓣","𝓤","𝓥","𝓦","𝓧","𝓨","𝓩"
+  ];
+
   function toFreakyText(input: string): string {
-    const normal = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const freaky = [
-      "𝓪", "𝓫", "𝓬", "𝓭", "𝓮", "𝓯", "𝓰", "𝓱", "𝓲", "𝓳", "𝓴", "𝓵", "𝓶", "𝓷", "𝓸", "𝓹", "𝓺", "𝓻", "𝓼", "𝓽", "𝓾", "𝓿", "𝔀", "𝔁", "𝔂", "𝔃", // Lowercase
-      "𝓐", "𝓑", "𝓒", "𝓓", "𝓔", "𝓕", "𝓖", "𝓗", "𝓘", "𝓙", "𝓚", "𝓛", "𝓜", "𝓝", "𝓞", "𝓟", "𝓠", "𝓡", "𝓢", "𝓣", "𝓤", "𝓥", "𝓦", "𝓧", "𝓨", "𝓩"  // Uppercase
-    ];
-
-
     return input.split('').map((char: string) => {
       const index = normal.indexOf(char);
       return index !== -1 ? freaky[index] : char;
     }).join('');
   }
 
-  // Получаем элементы
-  const textarea = document.getElementById('message') as HTMLTextAreaElement | null;
-  const copyButton = document.getElementById('copyButton') as HTMLButtonElement | null;
+  const textarea = document.getElementById('message') as HTMLTextAreaElement;
+  const copyButton = document.getElementById('copyButton') as HTMLButtonElement;
+  const clearButton = document.getElementById('clearButton') as HTMLButtonElement;
+  const toast = document.getElementById('freaky-toast') as HTMLDivElement;
 
-  if (textarea && copyButton) {
-    // Обработчик ввода
-    textarea.addEventListener('input', (event: Event) => {
-      const target = event.target as HTMLTextAreaElement | null;
-      if (target) {
-        const inputText = target.value;
-        const freakyText = toFreakyText(inputText);
-        target.value = freakyText;
-      }
-    });
-
-    // Обработчик копирования
-    copyButton.addEventListener('click', () => {
-      if (textarea) {
-        textarea.select();
-        navigator.clipboard.writeText(textarea.value).then(() => {
-          alert('Text copied to clipboard!');
-        });
-      }
-    });
+  function showToast(text: string) {
+    toast.textContent = text;
+    toast.classList.remove('opacity-0');
+    toast.classList.add('opacity-100');
+    setTimeout(() => {
+      toast.classList.remove('opacity-100');
+      toast.classList.add('opacity-0');
+    }, 1500);
   }
+
+  textarea.addEventListener('input', () => {
+    const inputText = textarea.value;
+    const freakyText = toFreakyText(inputText);
+    textarea.value = freakyText;
+  });
+
+  copyButton.addEventListener('click', () => {
+    textarea.select();
+    navigator.clipboard.writeText(textarea.value).then(() => {
+      showToast('COPIED TO CLIPBOARD!');
+    });
+  });
+
+  clearButton.addEventListener('click', () => {
+    textarea.value = '';
+    textarea.focus();
+  });
 </script>

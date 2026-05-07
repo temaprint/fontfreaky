@@ -1,13 +1,7 @@
 ---
-import siteData from "../../data/siteData.json";
-import jsonLDGenerator from "../../utils/jsonLD";
+import siteData from "../../data/siteLD.json";
 
 type Props = {
-  // Pass title and description for internal pages
-  // If not given, this defaults to site data
-  // Url is automatic
-  // Robots are optional
-  // Frontmatter triggers a CMS post type
   title: string;
   description: string;
   url: string;
@@ -21,48 +15,73 @@ const {
   description,
   url = Astro.url,
   image,
-  frontmatter,
   robots,
 } = Astro.props;
 
-// Again, frontmatter triggers CMS post type
-const jsonLD = jsonLDGenerator({
-  type: frontmatter ? "post" : "website",
-  post: frontmatter,
-  url,
-});
+const urlStr = typeof url === "string" ? url : url.pathname;
+const fullUrl = urlStr.startsWith("http") ? urlStr : `https://freaky.allbestfonts.com${urlStr}`;
+const imageUrl = image?.src
+  ? (image.src.startsWith("http") ? image.src : `https://freaky.allbestfonts.com${image.src}`)
+  : `https://freaky.allbestfonts.com${siteData.image}`;
 ---
 
-<!-- SEO -->
-<link rel="canonical" href={url} />
+<!-- Canonical -->
+<link rel="canonical" href={fullUrl} />
 
 <!-- Open Graph -->
-<meta property="og:site_name" content="Site Name" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteData.name} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:url" content={url} />
-<meta property="og:image" content={image?.src || siteData.image.src} />
-<meta property="og:image:url" content={image?.src || siteData.image.src} />
-<meta
-  property="og:image:secure_url"
-  content={image?.src || siteData.image.src}
-/>
-<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:url" content={fullUrl} />
+<meta property="og:image" content={imageUrl} />
 <meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="600" />
-<meta property="og:image:alt" content={image?.alt || siteData.image.alt} />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={image?.alt || siteData.name} />
+<meta property="og:locale" content="en_US" />
 
 <!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content={image?.src || siteData.image.src} />
+<meta name="twitter:image" content={imageUrl} />
 <meta name="twitter:image:alt" content={title} />
-
-<!-- Using environment domain -->
-<meta name="twitter:domain" content={import.meta.env.SITE} />
 
 {robots && <meta name="robots" content="noindex, nofollow" />}
 
-<!-- JSON LD -->
-<Fragment set:html={jsonLD} />
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": siteData.name,
+  "alternateName": siteData.alternateName,
+  "url": siteData.url,
+  "description": siteData.description,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": `${siteData.url}/?q={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Freaky Font",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Free bold script font inspired by Math Bold Script Unicode characters. Available in TTF and SVG formats.",
+  "url": siteData.url,
+  "image": imageUrl,
+  "author": {
+    "@type": "Person",
+    "name": "t3ma",
+    "url": "https://artemkan.com"
+  },
+  "license": "https://creativecommons.org/licenses/by/4.0/"
+})} />

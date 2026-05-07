@@ -1,0 +1,98 @@
+---
+const lowercase = "abcdefghijklmnopqrstuvwxyz".split("");
+const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const digits = "0123456789".split("");
+
+const freakyLower = ["𝓪","𝓫","𝓬","𝓭","𝓮","𝓯","𝓰","𝓱","𝓲","𝓳","𝓴","𝓵","𝓶","𝓷","𝓸","𝓹","𝓺","𝓻","𝓼","𝓽","𝓾","𝓿","𝔀","𝔁","𝔂","𝔃"];
+const freakyUpper = ["𝓐","𝓑","𝓒","𝓓","𝓔","𝓕","𝓖","𝓗","𝓘","𝓙","𝓚","𝓛","𝓜","𝓝","𝓞","𝓟","𝓠","𝓡","𝓢","𝓣","𝓤","𝓥","𝓦","𝓧","𝓨","𝓩"];
+const freakyDigit = ["𝟎","𝟏","𝟐","𝟑","𝟒","𝟓","𝟔","𝟕","𝟖","𝟗"];
+
+function makeChars(normal: string[], freaky: string[]) {
+  return normal.map((ch, i) => ({ normal: ch, freaky: freaky[i] }));
+}
+---
+
+<section id="charmap" class="px-4 py-12 md:px-8 max-w-5xl mx-auto">
+  <h2 class="font-pixel text-lg md:text-xl text-lime glow-lime mb-2">
+    &gt; CHARACTER MAP_
+  </h2>
+  <p class="text-cyan mb-8 text-lg">Click any character to copy it to clipboard</p>
+
+  <!-- Uppercase -->
+  <div class="mb-8">
+    <h3 class="font-pixel text-xs text-hotpink mb-4">// UPPERCASE A-Z</h3>
+    <div class="grid grid-cols-6 sm:grid-cols-9 md:grid-cols-13 gap-2">
+      {makeChars(uppercase, freakyUpper).map(({ normal, freaky }) => (
+        <button
+          class="char-btn group bg-grid border-2 border-lime/30 hover:border-hotpink p-2 text-center transition-all hover:scale-110 hover:bg-hotpink/10"
+          data-char={freaky}
+          title={`Click to copy ${freaky}`}
+        >
+          <span class="text-xs text-lime/50 block group-hover:hidden">{normal}</span>
+          <span class="text-2xl text-lime group-hover:text-hotpink block">{freaky}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Lowercase -->
+  <div class="mb-8">
+    <h3 class="font-pixel text-xs text-hotpink mb-4">// lowercase a-z</h3>
+    <div class="grid grid-cols-6 sm:grid-cols-9 md:grid-cols-13 gap-2">
+      {makeChars(lowercase, freakyLower).map(({ normal, freaky }) => (
+        <button
+          class="char-btn group bg-grid border-2 border-lime/30 hover:border-cyan p-2 text-center transition-all hover:scale-110 hover:bg-cyan/10"
+          data-char={freaky}
+          title={`Click to copy ${freaky}`}
+        >
+          <span class="text-xs text-lime/50 block group-hover:hidden">{normal}</span>
+          <span class="text-2xl text-lime group-hover:text-cyan block">{freaky}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Digits -->
+  <div>
+    <h3 class="font-pixel text-xs text-hotpink mb-4">// NUMBERS 0-9</h3>
+    <div class="grid grid-cols-5 sm:grid-cols-10 gap-2">
+      {makeChars(digits, freakyDigit).map(({ normal, freaky }) => (
+        <button
+          class="char-btn group bg-grid border-2 border-lime/30 hover:border-y2kyellow p-2 text-center transition-all hover:scale-110 hover:bg-y2kyellow/10"
+          data-char={freaky}
+          title={`Click to copy ${freaky}`}
+        >
+          <span class="text-xs text-lime/50 block group-hover:hidden">{normal}</span>
+          <span class="text-2xl text-lime group-hover:text-y2kyellow block">{freaky}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="char-toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-lime text-dark font-pixel text-xs px-4 py-2 opacity-0 transition-opacity pointer-events-none z-50">
+    COPIED!
+  </div>
+</section>
+
+<script>
+  const toast = document.getElementById('char-toast');
+  document.querySelectorAll('.char-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const char = (btn as HTMLElement).dataset.char;
+      if (char) {
+        navigator.clipboard.writeText(char).then(() => {
+          if (toast) {
+            toast.textContent = `${char} COPIED!`;
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+            setTimeout(() => {
+              toast.classList.remove('opacity-100');
+              toast.classList.add('opacity-0');
+            }, 1200);
+          }
+        });
+      }
+    });
+  });
+</script>

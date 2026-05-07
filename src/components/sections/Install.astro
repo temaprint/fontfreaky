@@ -1,0 +1,88 @@
+---
+const steps = [
+  {
+    num: "01",
+    title: "DOWNLOAD",
+    desc: "Click the download button to get FreakyFont.zip containing TTF and SVG files."
+  },
+  {
+    num: "02",
+    title: "EXTRACT",
+    desc: "Unzip the archive. You'll find FreakyFont.ttf and FreakyFont.svg inside."
+  },
+  {
+    num: "03",
+    title: "INSTALL TTF",
+    desc: 'Windows: Right-click the .ttf file → "Install". Mac: Double-click → "Install Font". Linux: Copy to ~/.local/share/fonts/'
+  },
+  {
+    num: "04",
+    title: "USE IN DESIGN",
+    desc: 'Open Photoshop, Figma, Illustrator, or any design tool and select "Freaky Font" from your font list.'
+  },
+  {
+    num: "05",
+    title: "WEB USAGE",
+    desc: 'For web projects, use the SVG or reference via CSS @font-face with the TTF file.'
+  },
+];
+
+const codeExample = `@font-face {
+  font-family: 'FreakyFont';
+  src: url('./FreakyFont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.freaky-text {
+  font-family: 'FreakyFont', cursive;
+}`;
+---
+
+<section id="install" class="px-4 py-12 md:px-8 max-w-5xl mx-auto">
+  <h2 class="font-pixel text-lg md:text-xl text-lime glow-lime mb-2">
+    &gt; INSTALLATION_
+  </h2>
+  <p class="text-cyan mb-8 text-lg">Get Freaky Font running in minutes. It's free, open source, and works everywhere.</p>
+
+  <!-- Download CTA -->
+  <div class="text-center mb-10">
+    <a href="https://freaky.allbestfonts.com/FreakyFont.zip" class="btn-y2k text-sm">
+      ★ DOWNLOAD FREAKY FONT ★
+    </a>
+    <p class="font-pixel text-[0.5rem] text-lime/40 mt-3">FREE • TTF + SVG • OPEN SOURCE</p>
+  </div>
+
+  <!-- Steps -->
+  <div class="space-y-4 mb-10">
+    {steps.map(({ num, title, desc }) => (
+      <div class="flex gap-4 md:gap-6 items-start group">
+        <span class="font-pixel text-2xl md:text-3xl text-hotpink/50 group-hover:text-hotpink transition-colors shrink-0">{num}</span>
+        <div>
+          <h3 class="font-pixel text-xs text-lime mb-1">{title}</h3>
+          <p class="text-cyan/80 text-base">{desc}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Code example -->
+  <div class="pixel-border bg-grid p-4 md:p-6 relative">
+    <span class="font-pixel text-[0.55rem] text-hotpink block mb-3">// CSS @font-face</span>
+    <pre class="text-cyan text-sm md:text-base overflow-x-auto whitespace-pre font-retro leading-relaxed"><code>{codeExample}</code></pre>
+    <button id="copy-css" class="btn-y2k-cyan text-[0.55rem] py-1 px-3 mt-3">COPY CODE</button>
+  </div>
+</section>
+
+<script>
+  const copyCss = document.getElementById('copy-css');
+  copyCss?.addEventListener('click', () => {
+    const code = copyCss.previousElementSibling?.textContent || '';
+    navigator.clipboard.writeText(code).then(() => {
+      if (copyCss instanceof HTMLElement) {
+        copyCss.textContent = 'COPIED!';
+        setTimeout(() => { copyCss.textContent = 'COPY CODE'; }, 1500);
+      }
+    });
+  });
+</script>

@@ -11,6 +11,8 @@ export default {
     },
     extend: {
       fontFamily: {
+        pixel: ['"Press Start 2P"', "monospace"],
+        retro: ['"VT323"', "monospace"],
         grotesk: ["Grotesk", "sans-serif"],
       },
       fontWeight: {
@@ -18,11 +20,14 @@ export default {
         medium: 500,
       },
       colors: {
-        green: "var(--green)",
-        black: "var(--black)",
-        dark: "var(--dark)",
-        gray: "var(--gray)",
-        white: "var(--white)",
+        lime: "#CCFF00",
+        hotpink: "#FF00FF",
+        cyan: "#00FFFF",
+        y2korange: "#FF6600",
+        purple: "#9933FF",
+        y2kyellow: "#FFFF00",
+        dark: "#000033",
+        grid: "#111133",
       },
     },
   },

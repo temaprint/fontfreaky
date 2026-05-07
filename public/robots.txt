@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://freaky.allbestfonts.com/sitemap.xml

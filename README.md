@@ -1,42 +1,55 @@
-# Freaky Font https://fontfreaky.com 
+# Freaky Font
 
-![font freaky](public/fontfreaky.png)
+![Freaky Font Preview](public/fontfreaky.png)
 
-## About Freaky Font
-Freaky Font is a custom typeface inspired by Math Bold Script-like fonts, which are traditionally embedded in Unicode characters and not available in practical formats such as TTF or SVG. This project aims to make these unique fonts accessible to designers and developers.
+**Free bold script font inspired by Math Bold Script Unicode characters.**
 
-## The Problem We Set Out to Solve
-- **Limited Accessibility**: Fonts like Math Bold Script exist only in Unicode and can only be rendered in specialized environments, leaving users without downloadable or editable versions.
-- **No Ready Formats**: There was no TTF or SVG version available, making it difficult for designers and developers to incorporate the font into their projects.
-- **Technical Barriers**: Extracting or converting these fonts into scalable formats was nearly impossible with standard tools.
+Available in TTF & SVG. Works in Photoshop, Figma, Illustrator, and web.
 
-## Our Solution
-To overcome these challenges, we developed Freaky Font—a beautifully crafted typeface inspired by Math Bold Script, available for download in TTF and SVG formats. Now, anyone can integrate this bold and elegant style into their projects with ease.
-
-## Installation
-1. Download the font files (TTF and SVG) from the repository.
-2. Install the TTF file by double-clicking it and selecting "Install" on your system.
-3. Use the SVG version in web projects or design tools that support vector fonts.
-
-## Usage
-- Compatible with design software like Adobe Illustrator, Photoshop, Figma, and Sketch.
-- Can be used in web development projects by embedding the TTF or using the SVG format.
-- Suitable for creative typography, branding, and graphic design projects.
-
-## License
-Freaky Font is released under the [MIT License](LICENSE), meaning you can freely use, modify, and distribute it.
-
-## Contributing
-We welcome contributions! If you have ideas for improvements, feel free to submit a pull request or open an issue.
-
-## Download
-Download **Freaky Font** today and unleash the boldness!
-
-[Download Freaky Font – Free TTF & SVG](https://fontfreaky.com/public/FreakyFont.zip)
-
-## Contact
-If you have any questions or suggestions, feel free to reach out or open an issue in the repository.
+**Download:** [FreakyFont.zip](https://freaky.allbestfonts.com/FreakyFont.zip) | **Try online:** [freaky.allbestfonts.com](https://freaky.allbestfonts.com)
 
 ---
-Enjoy using **Freaky Font**!
 
+## What is it?
+
+Math Bold Script is a beautiful style embedded in Unicode (`𝓐𝓑𝓒𝓓𝓔...`), but it was never available as a real font file. Freaky Font fixes that — it's a proper TTF + SVG typeface you can install and use anywhere.
+
+## Install
+
+1. Download [FreakyFont.zip](https://freaky.allbestfonts.com/FreakyFont.zip)
+2. Unzip — you get `FreakyFont.ttf` and `FreakyFont.svg`
+3. **Windows:** Right-click `.ttf` → Install
+4. **Mac:** Double-click `.ttf` → Install Font
+5. **Linux:** Copy to `~/.local/share/fonts/`
+
+## Web Usage
+
+```css
+@font-face {
+  font-family: 'FreakyFont';
+  src: url('./FreakyFont.ttf') format('truetype');
+}
+
+.freaky-text {
+  font-family: 'FreakyFont', cursive;
+}
+```
+
+## Online Converter
+
+No install needed — type text and get freaky characters instantly:
+[freaky.allbestfonts.com/#converter](https://freaky.allbestfonts.com/#converter)
+
+## Tech Stack
+
+- [Astro](https://astro.build) — static site generation
+- [Tailwind CSS](https://tailwindcss.com) — styling
+- Y2K/Web 1.0 aesthetic with Press Start 2P + VT323 fonts
+
+## License
+
+[Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+---
+
+Built by [t3ma](https://artemkan.com)

@@ -17,3 +17,6 @@ dist/
 *.tmp
 *.bak
 .env
+
+# Deploy
+deploy.sh

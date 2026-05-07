@@ -1,57 +1,55 @@
 ---
-import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
-
 ---
 
-<div class="mt-20">
-  <nav class="w-full top-0 left-0 z-50 fixed bg-white">
-    <header class="flex flex-col lg:flex-row justify-between items-center my-5 px-6 md:px-32">
-      <Astronav>
-        <div class="flex w-full lg:w-auto items-center justify-between">
-          <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="/Logo.svg" class="h-8" alt="Logo" />
-          </a>
-          <div class="block lg:hidden">
-            <div id="menu-icon" class="w-8 h-8 text-black cursor-pointer">
-              <!-- Open (hamburger) icon -->
-              <svg id="open-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-8 h-8">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-              <!-- Close (X) icon -->
-              <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-8 h-8 hidden">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </Astronav>
-    </header>
-  </nav>
-</div>
+<nav class="w-full bg-dark border-b-4 border-lime sticky top-0 z-50">
+  <div class="max-w-5xl mx-auto px-4 md:px-8 flex items-center justify-between h-14">
+    <a href="/" class="flex items-center gap-2 text-lime hover:text-hotpink transition-colors">
+      <span class="font-pixel text-xs md:text-sm">FREAKY</span>
+      <span class="font-pixel text-xs md:text-sm text-hotpink">FONT</span>
+    </a>
 
-<script is:inline>
-  // Get references to the menu icon, open/close icons, and menu items
-  const menuIcon = document.getElementById('menu-icon');
-  const openIcon = document.getElementById('open-icon');
-  const closeIcon = document.getElementById('close-icon');
-  const menuItems = document.getElementById('menu-items');
-  const closeMenuItems = document.querySelectorAll('[data-close-menu="true"]');  // Select all items with the 'data-close-menu' attribute
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#converter" class="font-pixel text-[0.6rem] text-cyan hover:text-hotpink transition-colors">CONVERTER</a>
+      <a href="#preview" class="font-pixel text-[0.6rem] text-cyan hover:text-hotpink transition-colors">PREVIEW</a>
+      <a href="#charmap" class="font-pixel text-[0.6rem] text-cyan hover:text-hotpink transition-colors">CHARMAP</a>
+      <a href="#install" class="font-pixel text-[0.6rem] text-cyan hover:text-hotpink transition-colors">INSTALL</a>
+      <a href="https://freaky.allbestfonts.com/FreakyFont.zip" class="btn-y2k text-[0.5rem] py-1.5 px-3">DOWNLOAD</a>
+    </div>
 
-  // Toggle the menu visibility and icon when the menu icon is clicked
-  menuIcon.addEventListener('click', () => {
-    menuItems.classList.toggle('hidden');  // Toggle the 'hidden' class on the menu
+    <!-- Mobile hamburger -->
+    <button id="mobile-menu-btn" class="md:hidden text-lime p-1" aria-label="Toggle menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
 
-    // Toggle between open and close icons
-    openIcon.classList.toggle('hidden');
-    closeIcon.classList.toggle('hidden');
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-dark border-t-2 border-lime/30 px-4 pb-4">
+    <div class="flex flex-col gap-3 py-3">
+      <a href="#converter" class="font-pixel text-[0.6rem] text-cyan hover:text-hotpink">CONVERTER</a>
+      <a href="#preview" class="font-pixel text-[0.6rem] text-cyan hover:text-hotpink">PREVIEW</a>
+      <a href="#charmap" class="font-pixel text-[0.6rem] text-cyan hover:text-hotpink">CHARMAP</a>
+      <a href="#install" class="font-pixel text-[0.6rem] text-cyan hover:text-hotpink">INSTALL</a>
+      <a href="https://freaky.allbestfonts.com/FreakyFont.zip" class="btn-y2k text-[0.5rem] py-1.5 px-3 text-center mt-1">DOWNLOAD</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
   });
 
-  // Close the menu when any item is clicked
-  closeMenuItems.forEach(item => {
-    item.addEventListener('click', () => {
-      menuItems.classList.add('hidden');  // Add the 'hidden' class to hide the menu
-      openIcon.classList.remove('hidden');  // Show the open (hamburger) icon
-      closeIcon.classList.add('hidden');  // Hide the close (X) icon
+  // Close menu on link click
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
     });
   });
 </script>

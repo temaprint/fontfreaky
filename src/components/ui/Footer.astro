@@ -1,61 +1,28 @@
 ---
-import { Image } from "astro:assets";
-import Logo from "public/Logo.svg";
-
-
-const links = [
-  { name: "Blog", href: "#Home" },
-];
 ---
 
-<section class="sm:px-5">
-  <div class="w-full max-w-[1240px] mx-auto">
-    <div
-      class="px-[15px] bg-dark text-gray py-[55px] lg:px-[60px] sm:rounded-t-[45px]"
-    >
-      <div>
-        <div
-          class="flex flex-col lg:flex-row gap-7 items-center justify-between"
-        >
-          <picture>
-            <a href="#home">
-              <Image src={Logo} alt="Logo for Kreatif Brand" />
-            </a>
-          </picture>
-        </div>
+<footer class="border-t-4 border-lime bg-dark mt-12">
+  <div class="max-w-5xl mx-auto px-4 md:px-8 py-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <span class="font-pixel text-xs text-lime">FREAKY</span>
+        <span class="font-pixel text-xs text-hotpink">FONT</span>
       </div>
 
-      <div class="h-[1px] bg-gray mb-5"></div>
-      <div
-        class="flex flex-col lg:flex-row h-20 justify-center mt-4 text-center md:justify-between md:mt-0"
-      >
-        <span
-          >2024 <a
-            class="underline"
-            target="_blank"
-            href="https://astro.build">Astro</a
-          > by 
-          <a 
-          class="underline"
-          target="_blank"
-          href="https://manulthanura.com">Manul</a
-          ></span
-        >&nbsp
-        <span>
-
-          <a
-            href="https://artemkan.com/"
-            target="_blank"
-            class="underline">t3ma</a
-          >
-          <span> &</span>
-          <a
-            class="underline"
-            href="https://creativecommons.org/licenses/by/4.0/"
-            target="_blank">Licence</a
-          >
-        </span>
+      <!-- Links -->
+      <div class="flex items-center gap-6 text-sm">
+        <a href="https://freaky.allbestfonts.com/FreakyFont.zip" class="text-cyan hover:text-hotpink transition-colors">Download</a>
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="text-cyan hover:text-hotpink transition-colors">Licence</a>
+        <a href="https://artemkan.com/" target="_blank" class="text-cyan hover:text-hotpink transition-colors">t3ma</a>
       </div>
     </div>
+
+    <div class="h-px bg-lime/10 my-4"></div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-lime/40">
+      <span class="font-pixel text-[0.45rem]">MADE WITH 💾 IN 2024 ★ BUILD WITH ASTRO</span>
+      <span class="font-pixel text-[0.45rem]">BEST VIEWED IN ANY BROWSER ★ <span id="visitor-count">VISITOR #00420</span></span>
+    </div>
   </div>
-</section>
+</footer>

@@ -1,31 +1,60 @@
 ---
-import Section from "./Section.astro";
 import { Image } from "astro:assets";
 import HeroIlust from "public/_image.svg";
 ---
 
-<Section id="home">
-<div class="relative flex flex-col-reverse items-center md:flex-row" id="hero">
-    <div class="row items-center py-5 md:w-6/12 md:pb-20 md:pt-10">
-        <div class="text-left space-y-3">
-            <h1 class="text-4xl font-medium leading-none md:text-6xl text-center md:text-left">The Problem Behind <br>Freaky Font</h1>
-            <p class="mt-6 mb-8 text-lg font-normal leading-7 sm:mb-12 text-center md:text-left md:pr-12">Creating and using Freaky Font wasn’t as easy as it might seem. The inspiration came from the challenges of working with Math Bold Script-like fonts, which are embedded in Unicode characters and not directly available in practical formats like TTF or SVG.</p>
-            <h2>The Problem We Set Out to Solve</h2>
-            <ul>
-                <li><strong>Limited Accessibility:</strong> Fonts like Math Bold Script exist only in Unicode and can only be rendered in specialized environments, leaving users without downloadable or editable versions.</li>
-                <li><strong>No Ready Formats:</strong> There was no TTF or SVG version available, making it difficult for designers and developers to incorporate the font into their projects.</li>
-                <li><strong>Technical Barriers:</strong> Extracting or converting these fonts into scalable formats wasn’t just difficult—it was nearly impossible with standard tools.</li>
-            </ul>
-            <p>This challenge led us to develop <strong>Freaky Font</strong>: a beautifully crafted typeface inspired by Math Bold Script, available for download in TTF and SVG formats.</p>
-            <p>Now, Freaky Font is here to bridge the gap, allowing anyone to integrate this bold and elegant style into their projects without hassle. <a href="https://fontfreaky.com/" target="_blank">Download it today</a> and unleash the boldness!</p>
-            <div class="w-full justify-center md:justify-start items-center inline-flex">
-                <a href="https://fontfreaky.com/public/FreakyFont.zip" target="_blank" class="px-8 py-5 bg-zinc-900 hover:bg-white rounded-2xl text-center text-white hover:text-black border text-xl font-normal leading-7">Download Freaky Font – Free TTF & SVG
-                </a>
-            </div>
+<section id="home" class="px-4 py-16 md:py-24 md:px-8 max-w-5xl mx-auto">
+  <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
+    <!-- Text content -->
+    <div class="md:w-7/12 space-y-6">
+      <div class="inline-block bg-hotpink/20 border border-hotpink px-2 py-0.5">
+        <span class="font-pixel text-[0.5rem] text-hotpink">v1.0 ★ FREE DOWNLOAD</span>
+      </div>
+
+      <h1 class="font-pixel text-xl md:text-2xl lg:text-3xl text-lime glow-lime leading-relaxed">
+        MAKE YOUR<br>TEXT <span class="text-hotpink glow-pink">FREAKY</span>
+      </h1>
+
+      <p class="text-cyan text-lg leading-relaxed">
+        Freaky Font is a bold script typeface inspired by <span class="text-lime">Math Bold Script</span> Unicode characters.
+        Now available as a real downloadable font in TTF and SVG formats.
+      </p>
+
+      <div class="space-y-3 text-base">
+        <div class="flex items-start gap-2">
+          <span class="text-y2kyellow">▸</span>
+          <span class="text-cyan/80">Works in Photoshop, Figma, Illustrator & more</span>
         </div>
+        <div class="flex items-start gap-2">
+          <span class="text-y2kyellow">▸</span>
+          <span class="text-cyan/80">TTF + SVG formats included</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-y2kyellow">▸</span>
+          <span class="text-cyan/80">Free & open source under Creative Commons</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-y2kyellow">▸</span>
+          <span class="text-cyan/80">Or use the online converter — no install needed</span>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3 pt-2">
+        <a href="https://freaky.allbestfonts.com/FreakyFont.zip" class="btn-y2k">
+          ★ DOWNLOAD FONT ★
+        </a>
+        <a href="#converter" class="btn-y2k btn-y2k-pink">
+          TRY ONLINE
+        </a>
+      </div>
     </div>
-    <div class="flex items-center py-5 md:w-6/12 md:pb-20 md:pt-10">
-        <Image src={HeroIlust} alt="Hero Ilustration" loading="eager" />
+
+    <!-- Hero illustration -->
+    <div class="md:w-5/12 relative">
+      <div class="pixel-border p-2 bg-grid relative scanlines">
+        <Image src={HeroIlust} alt="Freaky Font preview" loading="eager" />
+        <span class="absolute -top-3 -right-3 font-pixel text-[0.5rem] bg-hotpink text-white px-1.5 py-0.5">NEW!</span>
+      </div>
     </div>
-</div>
-</Section>
+  </div>
+</section>

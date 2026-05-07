@@ -1,15 +1,13 @@
 ---
 import Form from "../ui/Form.astro";
-import SectionTitle from "../ui/SectionTitle.astro";
-import Section from "./Section.astro";
 ---
 
-<Section id="contact">
-  <div class="mb-[140px] relative">
-    <SectionTitle
-      sectionTitle="Text to 𝓯𝓻𝓮𝓪𝓴𝔂"
-      description="So, who's freaky now? HAAAHAAAA!!! 😎"
-    />
-    <Form />
-  </div>
-</Section>
+<section id="converter" class="px-4 py-12 md:px-8 max-w-5xl mx-auto">
+  <h2 class="font-pixel text-lg md:text-xl text-lime glow-lime mb-2">
+    &gt; TEXT TO FREAKY_
+  </h2>
+  <p class="text-cyan mb-8 text-lg">
+    Type normal text → get freaky text. No install needed. <span class="text-hotpink">😎</span>
+  </p>
+  <Form />
+</section>

@@ -1,0 +1,87 @@
+---
+---
+
+<section id="preview" class="px-4 py-12 md:px-8 max-w-5xl mx-auto">
+  <h2 class="font-pixel text-lg md:text-xl text-lime glow-lime mb-2">
+    &gt; FONT PREVIEW_
+  </h2>
+  <p class="text-cyan mb-6 text-lg">Type anything and see it in Freaky style. Adjust size to preview at different scales.</p>
+
+  <div class="pixel-border-pink p-4 md:p-8 bg-grid relative">
+    <div class="flex items-center gap-3 mb-4">
+      <label for="preview-input" class="font-pixel text-xs text-hotpink">INPUT:</label>
+      <span class="blink text-hotpink">_</span>
+    </div>
+    <input
+      id="preview-input"
+      type="text"
+      placeholder="Type something here..."
+      class="w-full bg-dark border-2 border-cyan/40 p-3 text-cyan font-retro text-xl focus:border-cyan focus:outline-none placeholder:text-lime/30 mb-6"
+      maxlength="100"
+      autocomplete="off"
+    />
+
+    <div class="flex items-center justify-between mb-3">
+      <div class="flex items-center gap-3">
+        <label for="preview-size" class="font-pixel text-xs text-lime">SIZE:</label>
+        <input id="preview-size" type="range" min="16" max="80" value="36" class="accent-lime" />
+        <span id="preview-size-val" class="font-pixel text-xs text-lime">36px</span>
+      </div>
+      <button id="preview-copy" class="btn-y2k text-[0.6rem] py-2 px-3">
+        COPY FREAKY
+      </button>
+    </div>
+
+    <div class="bg-dark/60 border-2 border-lime/20 p-4 min-h-[100px] flex items-center justify-center relative scanlines overflow-hidden">
+      <div id="preview-output" class="text-lime break-all text-center relative z-10" style="font-size: 36px;">
+        𝓕𝓻𝓮𝓪𝓴𝔂 𝓕𝓸𝓷𝓽
+      </div>
+    </div>
+
+    <div class="mt-3 flex justify-between items-center">
+      <span id="preview-count" class="font-pixel text-[0.6rem] text-lime/50">15/100</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  const normal = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const freaky = [
+    "𝓪","𝓫","𝓬","𝓭","𝓮","𝓯","𝓰","𝓱","𝓲","𝓳","𝓴","𝓵","𝓶","𝓷","𝓸","𝓹","𝓺","𝓻","𝓼","𝓽","𝓾","𝓿","𝔀","𝔁","𝔂","𝔃",
+    "𝓐","𝓑","𝓒","𝓓","𝓔","𝓕","𝓖","𝓗","𝓘","𝓙","𝓚","𝓛","𝓜","𝓝","𝓞","𝓟","𝓠","𝓡","𝓢","𝓣","𝓤","𝓥","𝓦","𝓧","𝓨","𝓩"
+  ];
+
+  function toFreaky(input: string): string {
+    return input.split('').map((char: string) => {
+      const idx = normal.indexOf(char);
+      return idx !== -1 ? freaky[idx] : char;
+    }).join('');
+  }
+
+  const input = document.getElementById('preview-input') as HTMLInputElement;
+  const output = document.getElementById('preview-output') as HTMLDivElement;
+  const sizeSlider = document.getElementById('preview-size') as HTMLInputElement;
+  const sizeVal = document.getElementById('preview-size-val') as HTMLSpanElement;
+  const copyBtn = document.getElementById('preview-copy') as HTMLButtonElement;
+  const countEl = document.getElementById('preview-count') as HTMLSpanElement;
+
+  input.addEventListener('input', () => {
+    const freakyText = toFreaky(input.value);
+    output.textContent = freakyText || '𝓕𝓻𝓮𝓪𝓴𝔂 𝓕𝓸𝓷𝓽';
+    countEl.textContent = `${input.value.length}/100`;
+  });
+
+  sizeSlider.addEventListener('input', () => {
+    const size = sizeSlider.value;
+    output.style.fontSize = size + 'px';
+    sizeVal.textContent = size + 'px';
+  });
+
+  copyBtn.addEventListener('click', () => {
+    const text = output.textContent || '';
+    navigator.clipboard.writeText(text).then(() => {
+      copyBtn.textContent = 'COPIED!';
+      setTimeout(() => { copyBtn.textContent = 'COPY FREAKY'; }, 1500);
+    });
+  });
+</script>

@@ -1,31 +1,40 @@
 ---
 import Seo from "../components/seo/Seo.astro";
 
-// Pass the contents to create SEO for the page
 const { title, description, image, frontmatter, robots } = Astro.props;
 ---
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-  <!-- iOS 
-  <link rel="apple-touch-icon" sizes="256x256" href="/path/to/your/icon.png" />
-  -->
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="generator" content={Astro.generator} />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
+  <!-- Theme & PWA -->
+  <meta name="theme-color" content="#000033" />
+  <meta name="color-scheme" content="dark" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+
+  <!-- Primary Meta -->
   <title>{title}</title>
   <meta name="description" content={description} />
+  <meta name="author" content="t3ma" />
+  <meta name="keywords" content="freaky font, free font download, TTF font, SVG font, math bold script, unicode font, bold script typeface, fancy text converter, freaky text generator, free typography" />
 
   <Seo
     {title}
     {description}
-    url={Astro.url.toString()}
+    url={Astro.url.pathname}
     {image}
     {frontmatter}
     {robots}
   />
-
-  <!-- Preconnect fonts, images... -->
 </head>
